@@ -52,24 +52,14 @@ Add the `meta-coral` layer to bblayers.conf:
 
 Start baking:
 
-    bitbake core-image-base
+    bitbake core-image-full-cmdline
 
-Contributing
-------------
+then use bmaptool to write image to SD card, e.g.
 
-Please submit any patches against the `meta-coral` using the GitHub
-pull-request feature. Fork the repo, make a branch, do the work, rebase
-from upstream, create the pull request.
+    sudo bmaptool copy --nobmap tmp/deploy/images/coral-dev/core-image-full-cmdline-coral-dev-20190808100038.rootfs.wic.gz /dev/sdb
 
-For some useful guidelines to be followed when submitting patches,
-please refer to:
+Insert SD card, set jumpers 3 and 4 to ON, and before you boot,
+connect to serial console via picocom:
 
-- http://openembedded.org/wiki/Commit_Patch_Message_Guidelines
+    picocom -b 115200 /dev/ttyUSB0
 
-Pull requests will be discussed within the GitHub pull-request
-infrastructure. If you want to get informed on new PRs and the
-follow-up discussions please use the GitHub's notification system.
-
-Source code:
-
-- https://github.com/mirzak/meta-coral.git
